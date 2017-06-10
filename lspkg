@@ -1,0 +1,24 @@
+#/bin/bash
+
+FILE=$1
+
+if [ "$FILE"  == "" ];
+then
+FILE=$(uname -n)
+fi
+
+if [ -f $FILE.pkglist ];
+then
+read -r -p "$FILE already Exists, overwrite?[Y/n] " ANS
+case $ANS in
+    [yY][eE][sS]|[yY])
+           
+    dpkg --get-selections > $FILE.pkglist    
+    ;;
+    *)
+    read -r -p "new name: " ANS
+    FILE=$ANS    
+esac
+fi
+dpkg --get-selections > $FILE.pkglist
+

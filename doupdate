@@ -1,0 +1,11 @@
+#/bin/sh
+#davids magical package cleanup/update
+echo "This script needs admin priveledges"
+#check for/install updates
+sudo apt-get update 
+echo "updating packages"
+sudo apt-get  upgrade
+#autoremove obsolete packages
+sudo apt-get --purge autoremove 
+sudo apt-get autoclean
+

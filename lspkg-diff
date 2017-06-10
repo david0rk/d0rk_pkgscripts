@@ -1,0 +1,32 @@
+#!/bin/bash
+
+FILEA=$1
+FILEB=$2
+
+if [ $FILEA ] && [ $FILEB ];
+then
+#generate machine specific diff
+diff $1  $2   |grep "< " >  $1_added.tmp
+diff $1   $2  |grep "> " >  $2_added.tmp
+
+#strip arch
+grep -Ev 'amd64|i386' $1_added.tmp > $1.pkgdiff
+grep -Ev 'amd64|i386' $2_added.tmp > $2.pkgdiff
+
+#debug
+#geany *arch.tmp
+
+sed -i 's/<//' *.pkgdiff
+sed -i 's/<//' *.pkgdiff
+sed -i 's/>//' *.pkgdiff
+sed -i 's/install//' *.pkgdiff
+#clean temps
+rm *.tmp 
+
+else
+echo "Need more parameters, asshat"
+echo "usage: pkgdiff machine1.pkglist machine2.pkglist"
+fi 
+
+#debug
+#geany *.pkgdiff

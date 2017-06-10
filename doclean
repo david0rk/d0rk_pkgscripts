@@ -1,0 +1,45 @@
+#/bin/sh
+#davids magical package cleanup/update
+WORKDIR=$(pwd)
+BASEDIR=$(dirname $0)
+cd  $BASEDIR
+
+#remove orphaned packages
+
+#get list of orphans
+deborphan > orphans 
+
+#check package blacklist (don't remove orphans existing in the blacklist)
+
+#sort files for comparison
+sort .whitelist > whitelist.tmp
+sort orphans > orphans.tmp 
+
+#compare and only output orphans not existing in the blacklist
+comm -1 -3  --check-order  whitelist.tmp orphans.tmp  > orphans
+
+# if orphans exist, remove them.
+if [[ -s orphans ]] ; then
+	echo "Stray Packages found"
+	echo "Removing..."
+	$aflag # flags rerun, in case of multiple orphans.
+	sudo apt-get --purge remove $(cat orphans)
+	else
+		echo "No stray packages today"
+	fi ;
+	
+#cleanup temp files
+rm orphans
+rm *.tmp
+
+#general debian cleanup
+echo "General Cleanup: autoremove & autoclean"
+sudo apt-get --purge autoremove && sudo apt-get autoclean
+
+# if there are any crumbs run again
+if [ $aflag ] ; then
+doclean
+cd $WORKDIR
+fi;
+
+
