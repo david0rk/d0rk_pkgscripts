@@ -12,7 +12,7 @@ deborphan > orphans
 #check package blacklist (don't remove orphans existing in the blacklist)
 
 #sort files for comparison
-sort .whitelist > whitelist.tmp
+sort ~/.whitelist > whitelist.tmp
 sort orphans > orphans.tmp 
 
 #compare and only output orphans not existing in the blacklist
@@ -30,7 +30,7 @@ if [[ -s orphans ]] ; then
 	
 #cleanup temp files
 rm orphans
-rm *.tmp
+rm orphans.tmp whitelist.tmp
 
 #general debian cleanup
 echo "General Cleanup: autoremove & autoclean"

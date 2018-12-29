@@ -4,7 +4,7 @@ echo "This script needs admin priveledges"
 #check for/install updates
 sudo apt-get update 
 echo "updating packages"
-sudo apt-get  upgrade
+sudo apt-get  dist-upgrade
 #autoremove obsolete packages
 sudo apt-get --purge autoremove 
 sudo apt-get autoclean
