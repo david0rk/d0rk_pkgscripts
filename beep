@@ -1,0 +1,3 @@
+play -q -n synth 0.1 sin 200
+play -q -n synth 0.1 sin 400
+echo "job done" 
