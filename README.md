@@ -30,5 +30,3 @@ Usage: lspkg-diff (filename (optional))
 
 lspkg-diff:  compares two lists of packages and generates a list of packages unique to each system.
 Usage: ./lspkg-diff system1.pkglist system2.pkglist, Generates (inputfile1).pkgdiff (inputfile2).pkgdiff
-
-2/7/2020 - removed beep, added powersaver script.  turns off turbo boost, sets powersave governor. 
