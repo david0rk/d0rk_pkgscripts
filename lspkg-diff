@@ -24,7 +24,7 @@ sed -i 's/install//' *.pkgdiff
 rm *.tmp 
 
 else
-echo "Need more parameters, asshat"
+echo "Need more parameters"
 echo "usage: pkgdiff machine1.pkglist machine2.pkglist"
 fi 
 
